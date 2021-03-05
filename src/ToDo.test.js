@@ -4,7 +4,7 @@ const ID_RGX = /^[a-z][a-z0-9]{7}$/i;
 const ITEM_ERR = new Error('Item must be created with a non empty string');
 const TODO_ERR = new Error('ToDo can be filled only with `string`s or `Item`s');
 
-describe('Test the Item class', () => {
+describe.only('Test the Item class', () => {
   test('Item::constructor(<string>)', () => {
     const item = new Item('Buy some banananananas');
 
