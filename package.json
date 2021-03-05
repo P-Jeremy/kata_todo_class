@@ -1,0 +1,18 @@
+{
+  "name": "kata-implement-class-todo",
+  "version": "1.0.0",
+  "description": "All tests must pass",
+  "scripts": {
+    "test": "eslint src/*.js && jest src/*.test.js",
+    "test:ToDo": "eslint src/ToDo.* && jest src/ToDo.test.js",
+    "test:ToDoManager": "eslint src/ToDoManager.* && jest src/ToDoManager.test.js"
+  },
+  "author": "Jérémie Patonnier <jeremie@zenika.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^24.9.0"
+  }
+}
