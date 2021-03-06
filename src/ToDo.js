@@ -41,7 +41,11 @@ class Item {
 class ToDo extends Array {
   constructor(title) {
     super();
-    this.title = title;
+    if (typeof title === 'string') {
+      this.title = title;
+    } else {
+      this.title = '';
+    }
   }
 
   length() {

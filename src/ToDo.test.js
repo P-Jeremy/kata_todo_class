@@ -123,7 +123,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(0);
   });
 
-  test.skip('ToDo::constructor(<any>) // no title', () => {
+  test('ToDo::constructor(<any>) // no title', () => {
     expect((new ToDo()).title).toBe('');
     expect((new ToDo(undefined)).title).toBe('');
     expect((new ToDo(null)).title).toBe('');
