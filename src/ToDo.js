@@ -18,7 +18,11 @@ class Item {
     if (_isParameterAnInstanceOfClassOrAString(Item, item)) {
       this.content = item.content || item;
       this.checked = item.checked || false;
-      this.id = item.id || _generateId();
+      if (typeof item === 'string') {
+        this.id = _generateId();
+      } else {
+        this.id = item.checked ? _generateId() : item.id;
+      }
     } else {
       throw new Error('Item must be created with a non empty string');
     }

@@ -113,7 +113,7 @@ describe('Test the Item class', () => {
   });
 });
 
-describe.only('Test the ToDo class (Custom API)', () => {
+describe('Test the ToDo class (Custom API)', () => {
   test('ToDo::constructor(<string>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
 
