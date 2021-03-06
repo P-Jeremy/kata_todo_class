@@ -148,7 +148,7 @@ describe.only('Test the ToDo class (Custom API)', () => {
     expect(todo[1].id).toBe(data[2].id);
   });
 
-  test.skip('todo.add(<string>)', () => {
+  test('todo.add(<string>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
     const val = 'Cats rulez!';
     const item = todo.add(val);
@@ -156,10 +156,10 @@ describe.only('Test the ToDo class (Custom API)', () => {
     expect(item).toBeInstanceOf(Item);
     expect(item).toHaveProperty('content', val);
     expect(todo).toHaveLength(1);
-    expect(todo[0]).toBe(item);
+    expect(todo[0]).toStrictEqual(item);
   });
 
-  test.skip('todo.add(<Item>)', () => {
+  test('todo.add(<Item>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
     const val = new Item('Cats rulez!');
     const item = todo.add(val);
@@ -167,10 +167,10 @@ describe.only('Test the ToDo class (Custom API)', () => {
     expect(item).not.toBe(val);
     expect(item).toHaveProperty('content', val.content);
     expect(todo).toHaveLength(1);
-    expect(todo[0]).toBe(item);
+    expect(todo[0]).toStrictEqual(item);
   });
 
-  test.skip('todo.add(<any>)', () => {
+  test('todo.add(<any>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
 
     expect(() => { todo.add(); }).toThrow(TODO_ERR);

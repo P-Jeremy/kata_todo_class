@@ -42,7 +42,7 @@ function _isData(data) {
   return data && data.length;
 }
 
-function _pushItemsFromDataInTodo(todo, data) {
+function _pushItemInTodo(todo, data) {
   for (let index = 0; index < data.length; index += 1) {
     if (typeof data[index] === 'string' || data[index] instanceof Item) {
       todo.push(new Item(data[index]));
@@ -59,8 +59,17 @@ class ToDo extends Array {
       this.title = '';
     }
     if (_isData(data)) {
-      _pushItemsFromDataInTodo(this, data);
+      _pushItemInTodo(this, data);
     }
+  }
+
+  add(newElement) {
+    if (_isParameterAnInstanceOfClassOrAString(Item, newElement)) {
+      const item = new Item(newElement);
+      _pushItemInTodo(this, [item]);
+      return item;
+    }
+    throw new Error('ToDo can be filled only with `string`s or `Item`s');
   }
 }
 
