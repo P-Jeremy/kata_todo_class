@@ -50,6 +50,31 @@ function _pushItemInTodo(todo, data) {
   }
 }
 
+function _getIndexFromArray(array, id) {
+  let itemIndex;
+  array.some((element, index) => {
+    if (element.id === id) {
+      itemIndex = index;
+    }
+  });
+
+  return itemIndex;
+}
+
+function _isIndexANumber(index) {
+  return typeof index === 'number';
+}
+
+function _removeItemFromTodo(array, id) {
+  const itemIndex = _getIndexFromArray(array, id);
+  if (_isIndexANumber(itemIndex)) {
+    array.splice(itemIndex, 1);
+    return true;
+  }
+
+  return false;
+}
+
 class ToDo extends Array {
   constructor(title, data) {
     super();
@@ -70,6 +95,10 @@ class ToDo extends Array {
       return item;
     }
     throw new Error('ToDo can be filled only with `string`s or `Item`s');
+  }
+
+  remove(id) {
+    return _removeItemFromTodo(this, id);
   }
 }
 

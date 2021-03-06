@@ -185,7 +185,7 @@ describe.only('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(0);
   });
 
-  test.skip('todo.remove(<string>)', () => {
+  test('todo.remove(<string>)', () => {
     const data = ['Cats rulez!', 'Human must die!'];
     const todo = new ToDo('CAN I HAZ CHEESBURGER?', data);
 
