@@ -213,7 +213,7 @@ describe.only('Test the ToDo class (Custom API)', () => {
     expect(todo[0]).toHaveProperty('content', data[0]);
   });
 
-  test.skip('todo.remove(<any>)', () => {
+  test('todo.remove(<any>)', () => {
     const data = ['Cats rulez!', 'Human must die!'];
     const todo = new ToDo('CAN I HAZ CHEESBURGER?', data);
 

@@ -102,10 +102,13 @@ class ToDo extends Array {
   }
 
   remove(element) {
-    if (_isIdAString(element)) {
-      return _removeItemFromTodo(this, element);
+    if (_isParameterAnInstanceOfClassOrAString(Item, element)) {
+      if (_isIdAString(element)) {
+        return _removeItemFromTodo(this, element);
+      }
+      return _removeItemFromTodo(this, element.id);
     }
-    return _removeItemFromTodo(this, element.id);
+    return false;
   }
 }
 
