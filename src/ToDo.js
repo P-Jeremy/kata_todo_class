@@ -18,7 +18,7 @@ class Item {
     if (_isParameterAnInstanceOfClassOrAString(Item, item)) {
       this.content = item.content || item;
       this.checked = item.checked || false;
-      this.id = _generateId();
+      this.id = item.id || _generateId();
     } else {
       throw new Error('Item must be created with a non empty string');
     }
@@ -38,18 +38,29 @@ class Item {
   }
 }
 
+function _isData(data) {
+  return data && data.length;
+}
+
+function _pushItemsFromDataInTodo(todo, data) {
+  for (let index = 0; index < data.length; index += 1) {
+    if (typeof data[index] === 'string' || data[index] instanceof Item) {
+      todo.push(new Item(data[index]));
+    }
+  }
+}
+
 class ToDo extends Array {
-  constructor(title) {
+  constructor(title, data) {
     super();
     if (typeof title === 'string') {
       this.title = title;
     } else {
       this.title = '';
     }
-  }
-
-  length() {
-    return 0;
+    if (_isData(data)) {
+      _pushItemsFromDataInTodo(this, data);
+    }
   }
 }
 

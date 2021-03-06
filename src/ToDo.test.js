@@ -113,7 +113,7 @@ describe('Test the Item class', () => {
   });
 });
 
-describe('Test the ToDo class (Custom API)', () => {
+describe.only('Test the ToDo class (Custom API)', () => {
   test('ToDo::constructor(<string>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
 
@@ -134,7 +134,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect((new ToDo(() => {})).title).toBe('');
   });
 
-  test.skip('ToDo::constructor(<string>, <array>)', () => {
+  test('ToDo::constructor(<string>, <array>)', () => {
     const data = [
       42,
       'Meaow',
@@ -145,7 +145,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(2);
     expect(todo[0]).toBeInstanceOf(Item);
     expect(todo[0]).toHaveProperty('content', data[1]);
-    expect(todo[1]).toBe(data[2]);
+    expect(todo[1].id).toBe(data[2].id);
   });
 
   test.skip('todo.add(<string>)', () => {
