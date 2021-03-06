@@ -4,7 +4,7 @@ const ID_RGX = /^[a-z][a-z0-9]{7}$/i;
 const ITEM_ERR = new Error('Item must be created with a non empty string');
 const TODO_ERR = new Error('ToDo can be filled only with `string`s or `Item`s');
 
-describe.only('Test the Item class', () => {
+describe('Test the Item class', () => {
   test('Item::constructor(<string>)', () => {
     const item = new Item('Buy some banananananas');
 
@@ -123,7 +123,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(0);
   });
 
-  test('ToDo::constructor(<any>) // no title', () => {
+  test.skip('ToDo::constructor(<any>) // no title', () => {
     expect((new ToDo()).title).toBe('');
     expect((new ToDo(undefined)).title).toBe('');
     expect((new ToDo(null)).title).toBe('');
@@ -134,7 +134,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect((new ToDo(() => {})).title).toBe('');
   });
 
-  test('ToDo::constructor(<string>, <array>)', () => {
+  test.skip('ToDo::constructor(<string>, <array>)', () => {
     const data = [
       42,
       'Meaow',
@@ -148,7 +148,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo[1]).toBe(data[2]);
   });
 
-  test('todo.add(<string>)', () => {
+  test.skip('todo.add(<string>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
     const val = 'Cats rulez!';
     const item = todo.add(val);
@@ -159,7 +159,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo[0]).toBe(item);
   });
 
-  test('todo.add(<Item>)', () => {
+  test.skip('todo.add(<Item>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
     const val = new Item('Cats rulez!');
     const item = todo.add(val);
@@ -170,7 +170,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo[0]).toBe(item);
   });
 
-  test('todo.add(<any>)', () => {
+  test.skip('todo.add(<any>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
 
     expect(() => { todo.add(); }).toThrow(TODO_ERR);
@@ -185,7 +185,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(0);
   });
 
-  test('todo.remove(<string>)', () => {
+  test.skip('todo.remove(<string>)', () => {
     const data = ['Cats rulez!', 'Human must die!'];
     const todo = new ToDo('CAN I HAZ CHEESBURGER?', data);
 
@@ -199,7 +199,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo[0]).toHaveProperty('content', data[1]);
   });
 
-  test('todo.remove(<Item>)', () => {
+  test.skip('todo.remove(<Item>)', () => {
     const data = ['Cats rulez!', 'Human must die!'];
     const todo = new ToDo('CAN I HAZ CHEESBURGER?', data);
 
@@ -213,7 +213,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo[0]).toHaveProperty('content', data[0]);
   });
 
-  test('todo.remove(<any>)', () => {
+  test.skip('todo.remove(<any>)', () => {
     const data = ['Cats rulez!', 'Human must die!'];
     const todo = new ToDo('CAN I HAZ CHEESBURGER?', data);
 
@@ -229,7 +229,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(2);
   });
 
-  test('todo.toJSON()', () => {
+  test.skip('todo.toJSON()', () => {
     const data = ['Cats rulez!', 'Human must die!'];
     const todo = new ToDo('CAN I HAZ CHEESBURGER?', data);
     const json = todo.toJSON();
@@ -248,7 +248,7 @@ describe('Test the ToDo class (Custom API)', () => {
   });
 });
 
-describe('Test the ToDo class (overloaded Array method)', () => {
+describe.skip('Test the ToDo class (overloaded Array method)', () => {
   test('todo.concat(...<any>)', () => {
     const values = [
       ['Prrrrr'],
