@@ -110,6 +110,13 @@ class ToDo extends Array {
     }
     return false;
   }
+
+  toJSON() {
+    return {
+      title: this.title,
+      items: [...this],
+    };
+  }
 }
 
 module.exports = {

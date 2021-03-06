@@ -229,7 +229,7 @@ describe.only('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(2);
   });
 
-  test.skip('todo.toJSON()', () => {
+  test('todo.toJSON()', () => {
     const data = ['Cats rulez!', 'Human must die!'];
     const todo = new ToDo('CAN I HAZ CHEESBURGER?', data);
     const json = todo.toJSON();
