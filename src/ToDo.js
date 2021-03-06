@@ -75,6 +75,10 @@ function _removeItemFromTodo(array, id) {
   return false;
 }
 
+function _isIdAString(id) {
+  return typeof id === 'string';
+}
+
 class ToDo extends Array {
   constructor(title, data) {
     super();
@@ -97,8 +101,11 @@ class ToDo extends Array {
     throw new Error('ToDo can be filled only with `string`s or `Item`s');
   }
 
-  remove(id) {
-    return _removeItemFromTodo(this, id);
+  remove(element) {
+    if (_isIdAString(element)) {
+      return _removeItemFromTodo(this, element);
+    }
+    return _removeItemFromTodo(this, element.id);
   }
 }
 
