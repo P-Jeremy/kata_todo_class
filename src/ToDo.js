@@ -1,24 +1,9 @@
-function _generateId() {
-  const alphabetChar = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const alphaNumChar = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let id = '';
-  id += alphabetChar[Math.floor(Math.random() * alphabetChar.length)];
-  for (let index = 0; index < 7; index += 1) {
-    id += alphaNumChar[Math.floor(Math.random() * alphaNumChar.length)];
-  }
-  return id;
-}
-
-function _isParameterAnInstanceOfClassOrAString(classToCheck, param) {
-  return (typeof param === 'string' || (param instanceof classToCheck));
-}
-
 class Item {
   constructor(item) {
-    if (_isParameterAnInstanceOfClassOrAString(Item, item)) {
+    if (item && _isParameterAnItemObjectOrAString(item)) {
       this.content = item.content || item;
       this.checked = item.checked || false;
-      if (typeof item === 'string') {
+      if (_isParamString(item)) {
         this.id = _generateId();
       } else {
         this.id = item.checked ? _generateId() : item.id;
@@ -29,7 +14,7 @@ class Item {
   }
 
   toggle(...args) {
-    if (args.length) {
+    if (_isDataDefined(args)) {
       this.checked = Boolean(args[0]);
       return this.checked;
     }
@@ -42,13 +27,68 @@ class Item {
   }
 }
 
-function _isData(data) {
+class ToDo extends Array {
+  constructor(title, data) {
+    super();
+    if (typeof title === 'string') {
+      this.title = title;
+    } else {
+      this.title = '';
+    }
+    if (_isDataDefined(data)) {
+      _pushItemsFromArrayInTodo(this, data);
+    }
+  }
+
+  add(newElement) {
+    if (newElement && _isParameterAnItemObjectOrAString(newElement)) {
+      const item = new Item(newElement);
+      _pushItemsFromArrayInTodo(this, [item]);
+      return item;
+    }
+    throw new Error('ToDo can be filled only with `string`s or `Item`s');
+  }
+
+  remove(param) {
+    if (param && _isParameterAnItemObjectOrAString(param)) {
+      if (_isParamString(param)) {
+        return _removeItemFromTodo(this, param);
+      }
+      return _removeItemFromTodo(this, param.id);
+    }
+    return false;
+  }
+
+  toJSON() {
+    return {
+      title: this.title,
+      items: [...this],
+    };
+  }
+}
+
+function _generateId() {
+  const alphabetChar = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const alphaNumChar = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let id = '';
+  id += alphabetChar[Math.floor(Math.random() * alphabetChar.length)];
+  for (let index = 0; index < 7; index += 1) {
+    id += alphaNumChar[Math.floor(Math.random() * alphaNumChar.length)];
+  }
+  return id;
+}
+
+function _isParameterAnItemObjectOrAString(param) {
+  return (param.content || typeof param === 'string');
+}
+
+function _isDataDefined(data) {
   return data && data.length;
 }
 
-function _pushItemInTodo(todo, data) {
+function _pushItemsFromArrayInTodo(todo, data) {
   for (let index = 0; index < data.length; index += 1) {
-    if (typeof data[index] === 'string' || data[index] instanceof Item) {
+    if (data[index].content || typeof data[index] === 'string' || data[index] instanceof Item) {
       todo.push(new Item(data[index]));
     }
   }
@@ -79,48 +119,8 @@ function _removeItemFromTodo(array, id) {
   return false;
 }
 
-function _isIdAString(id) {
-  return typeof id === 'string';
-}
-
-class ToDo extends Array {
-  constructor(title, data) {
-    super();
-    if (typeof title === 'string') {
-      this.title = title;
-    } else {
-      this.title = '';
-    }
-    if (_isData(data)) {
-      _pushItemInTodo(this, data);
-    }
-  }
-
-  add(newElement) {
-    if (_isParameterAnInstanceOfClassOrAString(Item, newElement)) {
-      const item = new Item(newElement);
-      _pushItemInTodo(this, [item]);
-      return item;
-    }
-    throw new Error('ToDo can be filled only with `string`s or `Item`s');
-  }
-
-  remove(element) {
-    if (_isParameterAnInstanceOfClassOrAString(Item, element)) {
-      if (_isIdAString(element)) {
-        return _removeItemFromTodo(this, element);
-      }
-      return _removeItemFromTodo(this, element.id);
-    }
-    return false;
-  }
-
-  toJSON() {
-    return {
-      title: this.title,
-      items: [...this],
-    };
-  }
+function _isParamString(param) {
+  return typeof param === 'string';
 }
 
 module.exports = {
