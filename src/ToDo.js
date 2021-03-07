@@ -18,7 +18,11 @@ class Item {
     if (_isParameterAnInstanceOfClassOrAString(Item, item)) {
       this.content = item.content || item;
       this.checked = item.checked || false;
-      this.id = _generateId();
+      if (typeof item === 'string') {
+        this.id = _generateId();
+      } else {
+        this.id = item.checked ? _generateId() : item.id;
+      }
     } else {
       throw new Error('Item must be created with a non empty string');
     }
@@ -38,6 +42,88 @@ class Item {
   }
 }
 
+function _isData(data) {
+  return data && data.length;
+}
+
+function _pushItemInTodo(todo, data) {
+  for (let index = 0; index < data.length; index += 1) {
+    if (typeof data[index] === 'string' || data[index] instanceof Item) {
+      todo.push(new Item(data[index]));
+    }
+  }
+}
+
+function _getIndexFromArray(array, id) {
+  let itemIndex;
+  array.some((element, index) => {
+    if (element.id === id) {
+      itemIndex = index;
+    }
+  });
+
+  return itemIndex;
+}
+
+function _isIndexANumber(index) {
+  return typeof index === 'number';
+}
+
+function _removeItemFromTodo(array, id) {
+  const itemIndex = _getIndexFromArray(array, id);
+  if (_isIndexANumber(itemIndex)) {
+    array.splice(itemIndex, 1);
+    return true;
+  }
+
+  return false;
+}
+
+function _isIdAString(id) {
+  return typeof id === 'string';
+}
+
+class ToDo extends Array {
+  constructor(title, data) {
+    super();
+    if (typeof title === 'string') {
+      this.title = title;
+    } else {
+      this.title = '';
+    }
+    if (_isData(data)) {
+      _pushItemInTodo(this, data);
+    }
+  }
+
+  add(newElement) {
+    if (_isParameterAnInstanceOfClassOrAString(Item, newElement)) {
+      const item = new Item(newElement);
+      _pushItemInTodo(this, [item]);
+      return item;
+    }
+    throw new Error('ToDo can be filled only with `string`s or `Item`s');
+  }
+
+  remove(element) {
+    if (_isParameterAnInstanceOfClassOrAString(Item, element)) {
+      if (_isIdAString(element)) {
+        return _removeItemFromTodo(this, element);
+      }
+      return _removeItemFromTodo(this, element.id);
+    }
+    return false;
+  }
+
+  toJSON() {
+    return {
+      title: this.title,
+      items: [...this],
+    };
+  }
+}
+
 module.exports = {
   Item,
+  ToDo,
 };
