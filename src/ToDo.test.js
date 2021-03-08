@@ -248,7 +248,7 @@ describe('Test the ToDo class (Custom API)', () => {
   });
 });
 
-describe.skip('Test the ToDo class (overloaded Array method)', () => {
+describe('Test the ToDo class (overloaded Array method)', () => {
   test('todo.concat(...<any>)', () => {
     const values = [
       ['Prrrrr'],
@@ -302,7 +302,7 @@ describe.skip('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test('todo.fill(<string>, ...<number>)', () => {
+  test.skip('todo.fill(<string>, ...<number>)', () => {
     const tests = [
       ['Cats rulez!'],
       ['Cats rulez!', 1],
@@ -340,7 +340,7 @@ describe.skip('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test('todo.fill(<item>, ...<number>)', () => {
+  test.skip('todo.fill(<item>, ...<number>)', () => {
     const tests = [
       [new Item('Cats rulez!')],
       [new Item('Cats rulez!'), 1],
@@ -374,7 +374,7 @@ describe.skip('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test('todo.fill(<any>, ...<number>)', () => {
+  test.skip('todo.fill(<any>, ...<number>)', () => {
     const tests = [
       [true],
       [true, 1],
@@ -412,7 +412,7 @@ describe.skip('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test('todo.push(...<any>)', () => {
+  test.skip('todo.push(...<any>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
     const values = [
       'Cats rulez!',
@@ -435,7 +435,7 @@ describe.skip('Test the ToDo class (overloaded Array method)', () => {
     expect(todo[1]).toBe(values[1]);
   });
 
-  test('todo.splice(...<number>, ...<any>)', () => {
+  test.skip('todo.splice(...<number>, ...<any>)', () => {
     const tests = [
       [],
       [0],
@@ -485,7 +485,7 @@ describe.skip('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test('todo.unshift(...<any>)', () => {
+  test.skip('todo.unshift(...<any>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
     const items = [
       'Cats rulez!',
