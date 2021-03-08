@@ -97,6 +97,23 @@ class ToDo extends Array {
 
     return this.length;
   }
+
+  unshift(...args) {
+    const data = [];
+    args.forEach((arg) => {
+      if (_isParameterAnItemObjectOrAString(arg)) {
+        if (_isParamItem(arg)) {
+          return data.push(arg);
+        }
+
+        if (_isParamString(arg)) {
+          return data.push(new Item(arg));
+        }
+      }
+    });
+
+    return Array.prototype.unshift.call(this, ...data);
+  }
 }
 
 function _generateId() {
