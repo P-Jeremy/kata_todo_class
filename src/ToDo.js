@@ -88,8 +88,14 @@ function _isDataDefined(data) {
 
 function _pushItemsFromArrayInTodo(todo, data) {
   for (let index = 0; index < data.length; index += 1) {
-    if (data[index].content || typeof data[index] === 'string' || data[index] instanceof Item) {
+    if (_isParamString(data[index])) {
       todo.push(new Item(data[index]));
+    }
+    if (_isParamItem(data[index])) {
+      if ((data[index].checked)) {
+        todo.push(new Item(data[index]));
+      }
+      todo.push(data[index]);
     }
   }
 }
@@ -121,6 +127,10 @@ function _removeItemFromTodo(array, id) {
 
 function _isParamString(param) {
   return typeof param === 'string';
+}
+
+function _isParamItem(param) {
+  return param instanceof Item;
 }
 
 module.exports = {

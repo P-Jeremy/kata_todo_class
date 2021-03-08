@@ -145,7 +145,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(todo).toHaveLength(2);
     expect(todo[0]).toBeInstanceOf(Item);
     expect(todo[0]).toHaveProperty('content', data[1]);
-    expect(todo[1].id).toBe(data[2].id);
+    expect(todo[1]).toBe(data[2]);
   });
 
   test('todo.add(<string>)', () => {
@@ -156,7 +156,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(item).toBeInstanceOf(Item);
     expect(item).toHaveProperty('content', val);
     expect(todo).toHaveLength(1);
-    expect(todo[0]).toStrictEqual(item);
+    expect(todo[0]).toBe(item);
   });
 
   test('todo.add(<Item>)', () => {
@@ -167,7 +167,7 @@ describe('Test the ToDo class (Custom API)', () => {
     expect(item).not.toBe(val);
     expect(item).toHaveProperty('content', val.content);
     expect(todo).toHaveLength(1);
-    expect(todo[0]).toStrictEqual(item);
+    expect(todo[0]).toBe(item);
   });
 
   test('todo.add(<any>)', () => {
