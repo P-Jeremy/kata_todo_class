@@ -72,7 +72,9 @@ class ToDo extends Array {
   }
 
   fill(...args) {
-    args[0] = new Item(args[0]);
+    if (_isParamString(args[0])) {
+      args[0] = new Item(args[0]);
+    }
 
     return Array.prototype.fill.call(this, ...args);
   }

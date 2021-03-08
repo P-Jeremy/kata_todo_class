@@ -340,7 +340,7 @@ describe('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test.skip('todo.fill(<item>, ...<number>)', () => {
+  test('todo.fill(<item>, ...<number>)', () => {
     const tests = [
       [new Item('Cats rulez!')],
       [new Item('Cats rulez!'), 1],
