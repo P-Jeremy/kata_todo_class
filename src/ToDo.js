@@ -72,6 +72,9 @@ class ToDo extends Array {
   }
 
   fill(...args) {
+    if (!_isParameterAnItemObjectOrAString(args[0])) {
+      args[0] = undefined;
+    }
     if (_isParamString(args[0])) {
       args[0] = new Item(args[0]);
     }
@@ -92,7 +95,7 @@ function _generateId() {
 }
 
 function _isParameterAnItemObjectOrAString(param) {
-  return (param.content || typeof param === 'string');
+  return (param instanceof Item || typeof param === 'string');
 }
 
 function _isDataDefined(data) {

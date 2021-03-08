@@ -374,7 +374,7 @@ describe('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test.skip('todo.fill(<any>, ...<number>)', () => {
+  test('todo.fill(<any>, ...<number>)', () => {
     const tests = [
       [true],
       [true, 1],
