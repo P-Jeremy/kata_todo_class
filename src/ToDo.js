@@ -81,6 +81,22 @@ class ToDo extends Array {
 
     return Array.prototype.fill.call(this, ...args);
   }
+
+  push(...args) {
+    args.map((arg) => {
+      if (_isParameterAnItemObjectOrAString(arg)) {
+        if (_isParamItem(arg)) {
+          return Array.prototype.push.call(this, arg);
+        }
+
+        if (_isParamString(arg)) {
+          return Array.prototype.push.call(this, new Item(arg));
+        }
+      }
+    });
+
+    return this.length;
+  }
 }
 
 function _generateId() {

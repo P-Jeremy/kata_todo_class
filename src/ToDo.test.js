@@ -412,7 +412,7 @@ describe('Test the ToDo class (overloaded Array method)', () => {
     });
   });
 
-  test.skip('todo.push(...<any>)', () => {
+  test('todo.push(...<any>)', () => {
     const todo = new ToDo('CAN I HAZ CHEESBURGER?');
     const values = [
       'Cats rulez!',
