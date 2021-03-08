@@ -70,6 +70,12 @@ class ToDo extends Array {
     const newTodo = Array.prototype.concat.call(this, ...args);
     return new ToDo('', newTodo);
   }
+
+  fill(...args) {
+    args[0] = new Item(args[0]);
+
+    return Array.prototype.fill.call(this, ...args);
+  }
 }
 
 function _generateId() {
